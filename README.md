@@ -45,8 +45,10 @@ Stock: trata dos dados sobre itens cadastrados em estoque.
 
 # Camada de Domínio Buy:
 CartItem: A entidade CartItem representa um item individual no carrinho de compras. É como se fosse uma linha numa lista de compras, contendo informações sobre um produto específico que o usuário deseja comprar. 
+
 ShoppingCart: A entidade ShoppingCart representa o carrinho de compras inteiro. É como se fosse o contêiner que guarda todos os CartItems que o usuário deseja comprar. Ele pode ter vários CartItems, cada um representando um produto diferente (ou quantidades diferentes do mesmo produto) que o usuário deseja comprar.
 Camadas de Controladora e Serviço
+
 Nesta fase do projeto, ambas as camadas foram responsáveis pela implementação do CRUD das entidades.
 Em nossa implementação a camada da controladora ficou responsável pela especificação dos endpoints e implantação do CRUD seguindo os preceitos do REST, como utilização dos verbos do protocolo HTML e a não persistência de estado entre as requisições. Enquanto o service, cuidou das funcionalidades do CRUD.
 Por questões de organização os DTOs foram divididos entre request e response dentro da camada da controladora.
@@ -85,6 +87,7 @@ Para consumir a API do PayPal, foi necessário configurar as credenciais de aces
 
 Também foi usado para  os endpoints da API do PayPal  requisições do tipo REST, a qual, cada método  corresponde a um endpoint específico do controller. O método createPayment() simula o endpoint de criação de pagamento, o listAllPayments() simula o endpoint de listagem de todos os pagamentos e o getPaymentDetails() chama o endpoint de obtenção dos detalhes de um pagamento específico.
 Considerações Finais
+
 Portanto, podemos afirmar que o projeto foi concluído com sucesso. A implementação das funcionalidades foi realizada de forma satisfatória, com a criação dos CRUDs das entidades de suporte e a utilização da arquitetura em camadas, alcançando assim os objetivos propostos. 
 Além disso, a equipe conseguiu superar os desafios encontrados durante o desenvolvimento, tais como a implementação do Handler Exception e do PayPal, como também foi observado questões de boas práticas fundamentadas no SOLID e DDD, o que contribuiu para o aprendizado de todos os membros do grupo.
 
@@ -99,21 +102,29 @@ https://github.com/FIAP-Pos-tech/duck-auth
 
 # Pré-requisitos
 Java JDK 17;
+
 Maven;
 
 # Instalação do Java 17
 Acesse o site oficial do OpenJDK (https://adoptium.net/) ou do Oracle (https://www.oracle.com/java/technologies/javase-jdk17-downloads.html) para fazer o download do JDK 17 de acordo com o seu sistema operacional.
+
 Na página de downloads, escolha a versão adequada ao seu sistema operacional (Windows, macOS ou Linux) e clique no link de download.
 Siga as instruções de instalação específicas do seu sistema operacional
 
 # Instalação do Maven
 
 Acesse o site oficial do Apache Maven em https://maven.apache.org/download.cgi.
+
 Baixe a versão binária (ZIP) mais recente.
+
 Extraia o conteúdo do arquivo ZIP para um diretório de sua escolha.
+
 Configure a variável de ambiente M2_HOME para o diretório do Maven.
+
 Adicione %M2_HOME%\bin ao caminho (Path) do sistema.
+
 Abra um novo terminal ou prompt de comando.
+
 Execute o comando mvn --version para verificar se a instalação foi concluída com sucesso.
 
 
