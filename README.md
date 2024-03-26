@@ -53,8 +53,9 @@ Por questões de organização os DTOs foram divididos entre request e response 
 Neste momento, todos os métodos de exclusão efetivamente deletam os registros da base de dados.
 
 # API
-Nossa da API foi feita e disponibilizada no Postman. Nela está o detalhamento das nossas rotas de API, com exemplos de requisições e respostas.
-API Item / Auth / Buy 
+Nossa da API foi disponibilizada no Postman. Nela está o detalhamento das nossas rotas de API, com exemplos de requisições e respostas.
+API:
+Item / Auth / Buy 
 
 https://documenter.getpostman.com/view/28287473/2sA35D53PD
 
