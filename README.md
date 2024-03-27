@@ -94,7 +94,7 @@ Além disso, a equipe conseguiu superar os desafios encontrados durante o desenv
 # Repositórios
 https://github.com/FIAP-Pos-tech/duck-item
 
-https://github.com/FIAP-Pos-tech/duck-store
+https://github.com/FIAP-Pos-tech/duck-buy
 
 https://github.com/FIAP-Pos-tech/duck-payment
 
