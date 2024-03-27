@@ -3,7 +3,7 @@
 Desenvolver um sistema de e-commerce.
 
 # Duck Store: Relatório Técnico
-# Objetivos
+## Objetivos
 O principal objetivo deste relatório é discursar sobre a implementação da primeira fase do projeto.
 Como objetivos específicos:
 Apresentar a estrutura e arquitetura;
@@ -13,7 +13,7 @@ Discutir sobre escolhas realizadas e desafios encontrados.
 Duck Store é um sistema de e-commerce e tem por princípios fundamentais a utilização de tecnologias modernas e escaláveis para prover uma solução otimizada e eficiente, capaz de responder às variações de demanda diárias ou sazonais.
 Em desenvolvimento como trabalho de curso da pós-graduação em Arquitetura e Desenvolvimento Java na FIAP.
 
-# Solução adotada
+## Solução adotada
 Acreditamos que o modelo de microsserviços se encaixou perfeitamente no contexto por proporcionar maior granularidade no espaço da solução, fornecendo confortavelmente flexibilidade para um produto que pode mudar constantemente e de maneira veloz, como podemos perceber já que existe expectativa de crescimento tão grande tanto na equipe quanto na base de usuários que tende a ser multinacional. Com essa arquitetura, a Lei de Conway pode ser facilmente observada ao atribuir pequenos times para cuidar de cada sistema e dar um suporte contínuo e de alta qualidade em cada ponto. Além disso, a possibilidade de utilizar o canary deployment e de realizar implantação em cada microsserviço de forma separada corrobora com a necessidade de manter a solução online 24h. Em suma, todos os requisitos não funcionais guiaram essa decisão.
 Em contrapartida, existe uma complexidade grande envolvida nesse tipo de solução que pode ser um risco quando mal aplicada, por isso é crucial o bom planejamento em cada decisão. Explicamos a partir daqui como fizemos o processo de descoberta de cada microsserviço, quais padrões foram escolhidos e por que escolhemos cada um.
 Visão arquitetural da solução em camadas
@@ -26,24 +26,24 @@ Já a camada controladora tem a função de lidar com as requisições recebidas
 Essa distribuição de responsabilidades assegura a manutenção de um código mais limpo e organizado, além de possibilitar um gerenciamento mais eficaz da complexidade na camada de serviço.
 
 # Desenvolvimento
-# Tecnologias e Ferramentas
+## Tecnologias e Ferramentas
 Configuramos um projeto utilizando a stack Java 17, Spring Boot 3 e a interface JPA (Java Persistence API) combinada com um banco de dados relacional MySQL para persistência. 
 
 Para gerenciamento de dependências do projeto utilizamos o Maven.
 
 Também consumimos uma API externa, a PayPal, para auxiliar na obtenção de dados de pagamento. Utilizamos o Feign Client como meio de comunicação com API´s externas.
 
-# Camada de Domínio
+## Camada de Domínio
 Neste primeiro momento, foram implementadas três entidades do subdomínio de suporte relativas ao cadastro de informações no sistema: Item,  Purchas,PurchaseItem, Stock 
 Além das entidades, também temos classes auxiliares de repositórios, responsáveis pela persistência de dados.
 
-# Camada de Domínio Item:
+## Camada de Domínio Item:
 Item: representa um item do sistema e gerencia informações como Nome, description,price, category, etc.
 Purchase: representa o pedido de compra.
 PurchaseItem: representa o relacionamento de item com compra.
 Stock: trata dos dados sobre itens cadastrados em estoque.
 
-# Camada de Domínio Buy:
+## Camada de Domínio Buy:
 CartItem: A entidade CartItem representa um item individual no carrinho de compras. É como se fosse uma linha numa lista de compras, contendo informações sobre um produto específico que o usuário deseja comprar. 
 
 ShoppingCart: A entidade ShoppingCart representa o carrinho de compras inteiro. É como se fosse o contêiner que guarda todos os CartItems que o usuário deseja comprar. Ele pode ter vários CartItems, cada um representando um produto diferente (ou quantidades diferentes do mesmo produto) que o usuário deseja comprar.
@@ -57,11 +57,12 @@ Neste momento, todos os métodos de exclusão efetivamente deletam os registros 
 # API
 Nossa da API foi disponibilizada no Postman. Nela está o detalhamento das nossas rotas de API, com exemplos de requisições e respostas.
 API:
-Item / Auth / Buy 
+
+## Item / Auth / Buy 
 
 https://documenter.getpostman.com/view/28287473/2sA35D53PD
 
-# API Payment
+## API Payment
 
 https://documenter.getpostman.com/view/16901424/2sA35D53cW
 
@@ -73,14 +74,18 @@ Validação de dados: expansão das anotações;
 Consumo de API externa PayPa.
 
 # Segurança.
-Persistência de dados
+## Persistência de dados
+
 No projeto, na persistência de dados, optamos pelo uso da interface JPA em conjunto com o banco de dados MySQL. Dessa forma, aproveitamos para testar o funcionamento de nossas funcionalidades enquanto em desenvolvimento.
-Tratamento de Exceções
+
+## Tratamento de Exceções
+
 Para o tratamento de exceções, optamos por utilizar um Handler para capturar e retornar uma resposta padronizada para o cliente. Dessa forma, não é necessário tratar as exceções em cada método da controladora, o que pode ser considerado uma boa prática para melhorar a compreensão do código. Também, para padronizarmos o retorno dos erros na API criamos um DTO, chamado de ErrorResponse, responsável por encapsular e padronizar esses retornos.
 
-# Validações de dados
+## Validações de dados
 Adicionalmente, utilizamos as anotações de validação do framework Jakarta nas variáveis dos DTOs. Dessa forma, conseguimos especificar se uma variável deve ou não ser nula, estar em branco ou se datas devem ser passadas ou futuras. No caso de um dado não passar na validação, também ocorre o lançamento de uma exceção.
 Consumo de API externa
+
 O serviço da API do PayPal é uma interface que permite a integração de sistemas com a plataforma de pagamentos online do PayPal. Essa API oferece uma variedade de funcionalidades, como processamento de pagamentos, reembolsos, consultas de saldo, entre outras operações relacionadas a transações financeiras.
 
 Para consumir a API do PayPal, foi necessário configurar as credenciais de acesso e criar um serviço que simulou as operações de pagamento.
