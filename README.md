@@ -1,6 +1,6 @@
 # ARQUITETURA DE DESENVOLVIMENTO JAVA - FIAP
 # Desafio 
-Desenvolver um sistema de e-commerce.
+## Desenvolver um sistema de e-commerce.
 
 # Duck Store: Relatório Técnico
 ## Objetivos
@@ -16,7 +16,8 @@ Em desenvolvimento como trabalho de curso da pós-graduação em Arquitetura e D
 ## Solução adotada
 Acreditamos que o modelo de microsserviços se encaixou perfeitamente no contexto por proporcionar maior granularidade no espaço da solução, fornecendo confortavelmente flexibilidade para um produto que pode mudar constantemente e de maneira veloz, como podemos perceber já que existe expectativa de crescimento tão grande tanto na equipe quanto na base de usuários que tende a ser multinacional. Com essa arquitetura, a Lei de Conway pode ser facilmente observada ao atribuir pequenos times para cuidar de cada sistema e dar um suporte contínuo e de alta qualidade em cada ponto. Além disso, a possibilidade de utilizar o canary deployment e de realizar implantação em cada microsserviço de forma separada corrobora com a necessidade de manter a solução online 24h. Em suma, todos os requisitos não funcionais guiaram essa decisão.
 Em contrapartida, existe uma complexidade grande envolvida nesse tipo de solução que pode ser um risco quando mal aplicada, por isso é crucial o bom planejamento em cada decisão. Explicamos a partir daqui como fizemos o processo de descoberta de cada microsserviço, quais padrões foram escolhidos e por que escolhemos cada um.
-Visão arquitetural da solução em camadas
+
+## Visão arquitetural da solução em camadas
 
 Adotamos a arquitetura em camadas, nas quais, dividimos o projeto em pacotes a saber, controladora, serviço e domínio. Estão presentes também, os padrões de Domain Driven Design (DDD) e Representational State Transfer (REST), promovendo uma estrutura eficiente e clara.
 A camada de domínio assume a administração das entidades inerentes às regras de negócio.
@@ -37,21 +38,23 @@ Também consumimos uma API externa, a PayPal, para auxiliar na obtenção de dad
 Neste primeiro momento, foram implementadas três entidades do subdomínio de suporte relativas ao cadastro de informações no sistema: Item,  Purchas,PurchaseItem, Stock 
 Além das entidades, também temos classes auxiliares de repositórios, responsáveis pela persistência de dados.
 
-## Camada de Domínio Item:
+## Camada de Domínio Item
 Item: representa um item do sistema e gerencia informações como Nome, description,price, category, etc.
 Purchase: representa o pedido de compra.
 PurchaseItem: representa o relacionamento de item com compra.
 Stock: trata dos dados sobre itens cadastrados em estoque.
 
-## Camada de Domínio Buy:
+## Camada de Domínio Buy
 CartItem: A entidade CartItem representa um item individual no carrinho de compras. É como se fosse uma linha numa lista de compras, contendo informações sobre um produto específico que o usuário deseja comprar. 
 
 ShoppingCart: A entidade ShoppingCart representa o carrinho de compras inteiro. É como se fosse o contêiner que guarda todos os CartItems que o usuário deseja comprar. Ele pode ter vários CartItems, cada um representando um produto diferente (ou quantidades diferentes do mesmo produto) que o usuário deseja comprar.
-Camadas de Controladora e Serviço
+Camadas de Controladora e Serviço.
 
 Nesta fase do projeto, ambas as camadas foram responsáveis pela implementação do CRUD das entidades.
+
 Em nossa implementação a camada da controladora ficou responsável pela especificação dos endpoints e implantação do CRUD seguindo os preceitos do REST, como utilização dos verbos do protocolo HTML e a não persistência de estado entre as requisições. Enquanto o service, cuidou das funcionalidades do CRUD.
 Por questões de organização os DTOs foram divididos entre request e response dentro da camada da controladora.
+
 Neste momento, todos os métodos de exclusão efetivamente deletam os registros da base de dados.
 
 # API
@@ -73,7 +76,7 @@ Tratamento de Exceções e Handler;
 Validação de dados: expansão das anotações;
 Consumo de API externa PayPa.
 
-# Segurança.
+# Segurança
 ## Persistência de dados
 
 No projeto, na persistência de dados, optamos pelo uso da interface JPA em conjunto com o banco de dados MySQL. Dessa forma, aproveitamos para testar o funcionamento de nossas funcionalidades enquanto em desenvolvimento.
@@ -83,6 +86,7 @@ No projeto, na persistência de dados, optamos pelo uso da interface JPA em conj
 Para o tratamento de exceções, optamos por utilizar um Handler para capturar e retornar uma resposta padronizada para o cliente. Dessa forma, não é necessário tratar as exceções em cada método da controladora, o que pode ser considerado uma boa prática para melhorar a compreensão do código. Também, para padronizarmos o retorno dos erros na API criamos um DTO, chamado de ErrorResponse, responsável por encapsular e padronizar esses retornos.
 
 ## Validações de dados
+
 Adicionalmente, utilizamos as anotações de validação do framework Jakarta nas variáveis dos DTOs. Dessa forma, conseguimos especificar se uma variável deve ou não ser nula, estar em branco ou se datas devem ser passadas ou futuras. No caso de um dado não passar na validação, também ocorre o lançamento de uma exceção.
 Consumo de API externa
 
